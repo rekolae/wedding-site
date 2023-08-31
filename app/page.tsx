@@ -1,11 +1,20 @@
+import CountDownTimer from "@/components/CountdownTimer";
+import ImageGrid from "@/components/ImageGrid";
+
 export default function Home() {
   return (
-    <main>
-      <div className="p-6 max-w-sm mx-auto bg-white dark:bg-black rounded-xl shadow-lg flex items-center space-x-4">
-        <p className="text-slate-500 dark:text-slate-400">
-          The most awesomest wedding website!
-        </p>
-      </div>
-    </main>
+    <section id="home-section" className="section-primary">
+      <h1 className="h1-header">
+        Tere tulemast tallinkille, sihtkohaks on Anna ja Emili pulmapidu
+      </h1>
+      <h2 className="mb-6 text-center text-2xl tracking-tighter">🎉👰🤵🎉</h2>
+      <CountDownTimer />
+      <p>
+        Hello this is some random text that I am currently using to make the
+        space fill up enough so that I can see the changes the layout of the
+        thingy!
+      </p>
+      <ImageGrid />
+    </section>
   );
 }

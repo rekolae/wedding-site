@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .section-primary {
+    @apply dark:bg-very-dark-blue m-2 flex min-w-0 flex-auto transform flex-col rounded bg-white px-2 py-1;
+  }
+
+  .h1-header {
+    @apply mx-auto max-w-3xl text-center text-2xl font-bold tracking-tighter text-teal-700 dark:text-cyan-300;
+  }
+}

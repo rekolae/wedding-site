@@ -1,6 +1,10 @@
-## Getting Started
+# Getting Started
 
-First, run the development server:
+Rename `.env.example` to `.env` to set needed example values
+
+Run `npm install` to install needed packages
+
+And finally, run the development server:
 
 ```bash
 npm run dev
