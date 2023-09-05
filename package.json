@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev_turbo": "next dev --turbo",
+    "turbodev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typegen": "npx pocketbase-typegen --json ./types/pb_schema.json --out ./types/pocketbase-types.ts"
   },
   "dependencies": {
     "@types/node": "^20.5.6",
@@ -17,6 +18,7 @@
     "eslint": "^8.48.0",
     "eslint-config-next": "^13.4.19",
     "next": "^13.4.19",
+    "pocketbase": "^0.18.0",
     "postcss": "^8.4.28",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -25,6 +27,7 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
+    "pocketbase-typegen": "^1.1.13",
     "prettier": "^3.0.2",
     "prettier-plugin-tailwindcss": "^0.5.3"
   }
