@@ -20,8 +20,8 @@ export default function NavLinks({
               key={pageData[1]}
               className={`w-min transform p-1 px-2 transition duration-300 ${
                 pageData[2] === pathname
-                  ? "text-green-600 underline underline-offset-2 dark:text-purple-400"
-                  : "text-white hover:translate-x-1 hover:text-green-300 dark:hover:text-cyan-400"
+                  ? "text-black underline underline-offset-2 dark:text-purple-400"
+                  : "text-white hover:translate-x-1 hover:text-teal-400 dark:hover:text-cyan-400"
               }`}
             >
               <Link
