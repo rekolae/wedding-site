@@ -13,11 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-forest-green dark:bg-dark-blueish-gray text-black antialiased dark:text-white">
+      <body className="bg-forest-green dark:bg-dark-blueish-gray min-w-[400px] text-black antialiased dark:text-white">
         <Navigation />
         <main
           id="main-content"
-          className="mx-auto my-3 flex max-w-3xl border border-dotted border-red-500 blur-none transition duration-500"
+          className="mx-auto my-1 flex max-w-3xl blur-none transition duration-500"
         >
           {children}
         </main>
