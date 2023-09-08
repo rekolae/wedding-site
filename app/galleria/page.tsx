@@ -1,3 +1,5 @@
+import RSVPCard from "@/components/RSVPCard";
+
 export default function Gallery() {
   return (
     <section id="gallery-section" className="section-primary">
@@ -8,6 +10,7 @@ export default function Gallery() {
       <h2 className="mb-6 text-center text-2xl tracking-tighter">
         Work In Progress
       </h2>
+      <RSVPCard />
     </section>
   );
 }
