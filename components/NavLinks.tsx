@@ -2,6 +2,8 @@ import Link from "next/link";
 import { navData } from "@/lib/navData";
 import blurBackground from "@/lib/blurBackground";
 import { usePathname } from "next/navigation";
+import { Key } from "react";
+import { Url } from "next/dist/shared/lib/router/router";
 
 export default function NavLinks({
   open,
@@ -17,7 +19,7 @@ export default function NavLinks({
         {navData.map((pageData) => {
           return (
             <li
-              key={pageData[1]}
+              key={pageData[1] as Key}
               className={`w-min transform p-1 px-2 transition duration-300 ${
                 pageData[2] === pathname
                   ? "text-black underline underline-offset-2 dark:text-purple-400"
@@ -29,7 +31,7 @@ export default function NavLinks({
                   blurBackground(!open);
                   setOpen((open) => !open);
                 }}
-                href={pageData[2]}
+                href={pageData[2] as Url}
               >
                 {pageData[0]}
               </Link>
