@@ -4,6 +4,7 @@
 
 export enum Collections {
 	RSVP = "RSVP",
+	Images = "images",
 	Users = "users",
 }
 
@@ -34,8 +35,15 @@ export type AuthSystemFields<T = never> = {
 export type RSVPRecord = {
 	attending?: boolean
 	avec?: boolean
+	extra_info?: string
 	food_restrictions?: string
 	respondents?: RecordIdString[]
+}
+
+export type ImagesRecord = {
+	image?: string[]
+	title?: string
+	uploader?: RecordIdString
 }
 
 export type UsersRecord = {
@@ -45,16 +53,19 @@ export type UsersRecord = {
 
 // Response types include system fields and match responses from the PocketBase API
 export type RSVPResponse<Texpand = unknown> = Required<RSVPRecord> & BaseSystemFields<Texpand>
+export type ImagesResponse<Texpand = unknown> = Required<ImagesRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
 
 export type CollectionRecords = {
 	RSVP: RSVPRecord
+	images: ImagesRecord
 	users: UsersRecord
 }
 
 export type CollectionResponses = {
 	RSVP: RSVPResponse
+	images: ImagesResponse
 	users: UsersResponse
 }
