@@ -54,15 +54,15 @@ async function getRSVPData() {
 
     return return_val;
   } else {
-    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL!);
+    const pb = new PocketBase(process.env.POCKETBASE_URL!);
 
     let authData;
 
     try {
       authData = await pb
         .collection("users")
-        .authWithPassword("TestSingle", "TestSingle");
-      //.authWithPassword("TestCouple1", "TestCouple1", { cache: "no-cache" });
+        //.authWithPassword("TestSingle", "TestSingle", { cache: "no-cache" });
+        .authWithPassword("TestCouple1", "TestCouple1", { cache: "no-cache" });
     } catch (err) {
       console.log(err);
       return null;
@@ -86,7 +86,7 @@ async function getRSVPData() {
     console.dir(record, { depth: null });
 
     // Artificial delay for suspense testing and visualizing
-    //await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     return record;
   }
@@ -127,7 +127,9 @@ export default async function RSVPCard() {
               id="arriving"
               checked={data.attending}
             />
-            <ToggleButton text="Avec" id="avec" checked={data.avec} />
+            {data.respondents.length == 1 ? (
+              <ToggleButton text="Avec" id="avec" checked={data.avec} />
+            ) : null}
           </div>
           <div className="mb-4">
             <label

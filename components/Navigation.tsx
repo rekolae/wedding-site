@@ -10,10 +10,10 @@ export default function Navigation() {
 
   // <section className="sticky top-0 z-10 mx-auto max-w-3xl">
   return (
-    <section className="mx-auto max-w-3xl">
+    <section className="mx-auto mt-2 max-w-3xl">
       <div
         id="nav-header"
-        className=" dark:bg-very-dark-blue mx-2 my-1 flex max-w-3xl transform flex-col rounded bg-white  p-1 blur-none transition duration-500"
+        className=" mx-2 my-1 flex max-w-3xl transform flex-col rounded bg-white p-1  blur-none transition duration-500 dark:bg-very-dark-blue"
       >
         <div className="m-1 flex">
           <button

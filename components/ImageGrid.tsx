@@ -8,8 +8,8 @@ import img6 from "@/public/img6.jpg";
 
 export default function ImageGrid() {
   return (
-    <div className="my-8 columns-2 gap-4 sm:columns-3">
-      <div className="relative mb-4 h-40 transform transition-transform duration-300 lg:hover:scale-110">
+    <div className="mx-2 my-8 columns-2 gap-4 sm:columns-3">
+      <div className="relative mb-4 h-40 transform transition-transform duration-300 lg:hover:scale-105">
         <Image
           alt=""
           src={img1}
@@ -19,7 +19,7 @@ export default function ImageGrid() {
           className="rounded-md object-cover object-center"
         />
       </div>
-      <div className="relative mb-4 h-80 transform transition-transform duration-300 sm:mb-0 lg:hover:scale-110">
+      <div className="relative mb-4 h-80 transform transition-transform duration-300 sm:mb-0 lg:hover:scale-105">
         <Image
           alt=""
           src={img2}
@@ -29,7 +29,7 @@ export default function ImageGrid() {
           className="rounded-md object-cover object-center"
         />
       </div>
-      <div className="relative h-40 transform transition-transform duration-300 sm:mb-4 sm:h-80 lg:hover:scale-110">
+      <div className="relative h-40 transform transition-transform duration-300 sm:mb-4 sm:h-80 lg:hover:scale-105">
         <Image
           alt="Loki tired"
           src={img3}
@@ -39,7 +39,7 @@ export default function ImageGrid() {
           className="rounded-md object-cover object-bottom"
         />
       </div>
-      <div className="relative mb-4 h-40 transform transition-transform duration-300 sm:mb-0 lg:hover:scale-110">
+      <div className="relative mb-4 h-40 transform transition-transform duration-300 sm:mb-0 lg:hover:scale-105">
         <Image
           alt="Loki see many far"
           src={img4}
@@ -49,7 +49,7 @@ export default function ImageGrid() {
           className="rounded-md object-cover object-center"
         />
       </div>
-      <div className="relative mb-4 h-40 transform transition-transform duration-300 lg:hover:scale-110">
+      <div className="relative mb-4 h-40 transform transition-transform duration-300 lg:hover:scale-105">
         <Image
           alt=""
           src={img6}
@@ -59,7 +59,7 @@ export default function ImageGrid() {
           className="rounded-md object-cover object-center"
         />
       </div>
-      <div className="relative h-80 transform transition-transform duration-300 lg:hover:scale-110">
+      <div className="relative h-80 transform transition-transform duration-300 lg:hover:scale-105">
         <Image
           alt=""
           src={img5}
