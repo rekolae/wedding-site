@@ -1,12 +1,21 @@
-export const dynamic = "force-dynamic";
+"use client";
 
 import CountDownTimer from "@/components/CountdownTimer";
 import ImageGrid from "@/components/ImageGrid";
 import RSVPCard from "@/components/RSVPCard";
-import RSVPSkeleton from "@/components/RSVPSkeleton";
-import { Suspense } from "react";
+import { initPb } from "@/lib/pbHelpers";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const [isAuthenticated, setAuth] = useState(false);
+  const [isAdmin, setAdmin] = useState(false);
+
+  useEffect(() => {
+    const pb = initPb();
+    setAuth(pb.authStore.isValid);
+    setAdmin(pb.authStore.isAdmin);
+  }, []);
+
   return (
     <section id="home-section" className="section-primary">
       <h1 className="h1-header">
@@ -15,11 +24,17 @@ export default function Home() {
       <h2 className="mb-6 text-center text-2xl tracking-tighter">🎉👰🤵🎉</h2>
       <CountDownTimer />
 
-      <div className="my-2">
-        <Suspense fallback={<RSVPSkeleton />}>
+      {isAuthenticated && !isAdmin ? (
+        <div className="my-2">
           <RSVPCard />
-        </Suspense>
-      </div>
+        </div>
+      ) : null}
+
+      {isAdmin ? (
+        <div className="my-4">
+          <h2 className="mb-6 text-center text-2xl">Admin access granted!</h2>
+        </div>
+      ) : null}
 
       <p>
         Hello this is some random text that I am currently using to make the

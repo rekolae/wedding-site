@@ -1,178 +1,194 @@
+"use client";
+
 import ToggleButton from "./ToggleButton";
 import PocketBase from "pocketbase";
 import { Collections, RSVPResponse } from "@/types/pocketbase-types";
 import { ExpandWithRespondents as Texpand } from "@/types/pb-types-extension";
+import { useEffect, useState } from "react";
+import RSVPSkeleton from "./RSVPSkeleton";
+//@ts-ignore
+import { experimental_useFormState as useFormState } from "react-dom";
+//@ts-ignore
+import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { updateRSVP } from "@/actions/updateRSVP";
+import { initPb } from "@/lib/pbHelpers";
+import { AuthModel } from "pocketbase";
 
-async function getRSVPData() {
-  // For testing, no need to hammer the database unneccessarily
-  if (true) {
-    const return_val: RSVPResponse<Texpand> = {
-      attending: true,
-      avec: true,
-      collectionId: "s3m8e7mavogb8yv",
-      collectionName: Collections.RSVP,
-      created: "2023-09-08 21:32:25.705Z",
-      expand: {
-        respondents: [
-          {
-            Partner: "bx0d4drv8yx5kvl",
-            collectionId: "_pb_users_auth_",
-            collectionName: Collections.Users,
-            created: "2023-09-08 21:29:27.096Z",
-            email: "",
-            emailVisibility: false,
-            id: "5fj7a3r9ot9rkp5",
-            name: "Test couple #1",
-            updated: "2023-09-11 16:41:35.981Z",
-            username: "TestCouple1",
-            verified: true
-          },
-          {
-            Partner: "5fj7a3r9ot9rkp5",
-            collectionId: "_pb_users_auth_",
-            collectionName: Collections.Users,
-            created: "2023-09-08 21:29:15.759Z",
-            email: "",
-            emailVisibility: false,
-            id: "bx0d4drv8yx5kvl",
-            name: "Test couple #2",
-            updated: "2023-09-08 21:29:32.606Z",
-            username: "TestCouple2",
-            verified: true
-          }
-        ]
-      },
-      extra_info: "plz work",
-      food_restrictions: "Bork",
-      id: "wan2nz4cbm3pgwv",
-      respondents: ["5fj7a3r9ot9rkp5", "bx0d4drv8yx5kvl"],
-      updated: "2023-09-12 21:12:26.712Z"
-    };
+type LoginFormState = {
+  message: string | null;
+  //count: number;
+  //error: boolean | null;
+  token: string | null;
+  model: AuthModel | null;
+};
 
-    // Artificial delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+const initialState: LoginFormState = {
+  message: null,
+  //count: 0,
+  //error: null,
+  //authdata: null
+  token: initPb().authStore.token,
+  model: initPb().authStore.model
+};
 
-    return return_val;
-  } else {
-    const pb = new PocketBase(process.env.POCKETBASE_URL!);
+function SubmitButton() {
+  const { pending } = useFormStatus();
 
-    let authData;
-
-    try {
-      authData = await pb
-        .collection("users")
-        //.authWithPassword("TestSingle", "TestSingle", { cache: "no-cache" });
-        .authWithPassword("TestCouple1", "TestCouple1", { cache: "no-cache" });
-    } catch (err) {
-      console.log(err);
-      return null;
-    }
-
-    if (!pb.authStore.isValid) {
-      console.log("Auth failed!");
-      return null;
-    }
-
-    const record = await pb
-      .collection(Collections.RSVP)
-      .getFirstListItem<RSVPResponse<Texpand>>(
-        `respondents.id?="${authData.record.id}"`,
-        {
-          expand: "respondents",
-          cache: "no-store"
-        }
-      );
-
-    console.dir(record, { depth: null });
-
-    // Artificial delay for suspense testing and visualizing
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    return record;
-  }
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="w-full rounded-lg bg-green-600 px-5 py-2.5 text-center text-sm font-medium text-white transition duration-200 enabled:hover:scale-105 enabled:hover:bg-green-700 disabled:bg-cyan-800 dark:bg-cyan-400 dark:text-black enabled:dark:hover:bg-cyan-500"
+    >
+      {pending ? "Tallennetaan..." : "Tallenna"}
+    </button>
+  );
 }
 
-export default async function RSVPCard() {
-  const data: RSVPResponse<Texpand> | null = await getRSVPData();
+export default function RSVPCard() {
+  //const data: RSVPResponse<Texpand> | null = await getRSVPData();
+  const [data, setData] = useState<RSVPResponse<Texpand> | null>(null);
+  const [state, formAction] = useFormState(updateRSVP, initialState);
+  const [showMsg, setShowMsg] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
-  if (!data) {
+  useEffect(() => {
+    async function getRSVPData() {
+      const pb = initPb();
+
+      if (!pb.authStore.isValid) {
+        //console.log("Auth failed!");
+        return null;
+      } else {
+        //console.log("AUTHENTICATED AS " + pb.authStore.model?.name);
+      }
+
+      let response = await fetch("http://localhost:3000/api/rsvp/getOne", {
+        cache: "no-store",
+        headers: {
+          token: pb.authStore.token,
+          model: JSON.stringify(pb.authStore.model)
+        }
+      });
+
+      const record = await response.json();
+
+      //console.dir(record);
+
+      // Artificial delay for loading skeleton testing and visualizing
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      setData(record);
+      setLoading(false);
+      //return record;
+    }
+
+    getRSVPData().catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    if (!state.message) {
+      setShowMsg(false);
+      return;
+    }
+    // Display the message and hide after 5 secs
+    setShowMsg(true);
+    const timer = setTimeout(() => {
+      setShowMsg(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [state]);
+
+  /*
+  console.log(
+    `BEFORE IF AUTHSTORE VALID: ${
+      new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL!).authStore.isValid
+        ? "VALID!"
+        : "INVALID!"
+    }`
+  );
+  */
+
+  /*
+  if (state.message) {
+    setTimeout(() => setShowMsg(false), 5000);
+  }
+  */
+
+  if (isLoading) {
+    return <RSVPSkeleton />;
+  } else {
     return (
       <div className="mx-auto mb-4 w-[350px] rounded-lg border border-gray-200 bg-white shadow-xl dark:border-cyan-800 dark:bg-very-dark-blue dark:shadow-cyan-900">
-        <h1 className="my-4 text-center text-2xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
-          Something went wrong ☹️
+        <h1 className="mt-4 text-center text-2xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
+          RSVP
         </h1>
-        <h2 className="mb-4 text-center text-lg font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
-          Try logging in again
+        <h2 className="my-1 text-center text-lg font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
+          {data?.expand?.respondents.length == 2
+            ? `${data.expand?.respondents.at(0)
+                ?.name} & ${data.expand?.respondents.at(1)?.name}`
+            : `${data?.expand?.respondents.at(0)?.name}`}
         </h2>
+        <div className="px-6 py-4">
+          <div
+            id="status-message-update"
+            className={`mb-4 overflow-hidden rounded-lg bg-green-700 transition-[height] duration-200 ${
+              showMsg ? "h-6" : "h-0"
+            }`}
+          >
+            <h3 className="text-center">{state?.message}</h3>
+          </div>
+          <form className="flex flex-col" action={formAction}>
+            <input type="hidden" id="RSVP-ID" name="RSVP-ID" value={data?.id} />
+            <div className="mb-4 space-y-1">
+              <ToggleButton
+                text="Tulossa"
+                id="arriving"
+                checked={data?.attending || false}
+              />
+              {data?.respondents.length == 1 ? (
+                <ToggleButton text="Avec" id="avec" checked={data.avec} />
+              ) : null}
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="food-limitations"
+                className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Ruokarajoitteet
+              </label>
+              <input
+                type="text"
+                name="food-limitations"
+                id="food-limitations"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                placeholder="Laktoosi-intoleranssi, gluteeniton etc"
+                defaultValue={
+                  data?.food_restrictions ? data?.food_restrictions : ""
+                }
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="extra-info"
+                className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Lisätietoa
+              </label>
+              <input
+                type="text"
+                name="extra-info"
+                id="extra-info"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                placeholder="Vain toinen pääsee, avecin nimi etc"
+                defaultValue={data?.extra_info ? data?.extra_info : ""}
+              />
+            </div>
+            <SubmitButton />
+          </form>
+        </div>
       </div>
     );
   }
-
-  return (
-    <div className="mx-auto mb-4 w-[350px] rounded-lg border border-gray-200 bg-white shadow-xl dark:border-cyan-800 dark:bg-very-dark-blue dark:shadow-cyan-900">
-      <h1 className="mt-4 text-center text-2xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
-        RSVP
-      </h1>
-      <h2 className="my-1 text-center text-lg font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
-        {data.expand?.respondents.length == 2
-          ? `${data.expand?.respondents.at(0)
-              ?.name} & ${data.expand?.respondents.at(1)?.name}`
-          : `${data.expand?.respondents.at(0)?.name}`}
-      </h2>
-      <div className="px-6 py-4">
-        <form className="flex flex-col">
-          <div className="mb-4 space-y-1">
-            <ToggleButton
-              text="Tulossa"
-              id="arriving"
-              checked={data.attending}
-            />
-            {data.respondents.length == 1 ? (
-              <ToggleButton text="Avec" id="avec" checked={data.avec} />
-            ) : null}
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="food-limitations"
-              className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Ruokarajoitteet
-            </label>
-            <input
-              type="text"
-              name="food-limitations"
-              id="food-limitations"
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-              placeholder="Laktoosi-intoleranssi, gluteeniton etc"
-              defaultValue={
-                data.food_restrictions ? data.food_restrictions : ""
-              }
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="extra-info"
-              className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Lisätietoa
-            </label>
-            <input
-              type="text"
-              name="extra-info"
-              id="extra-info"
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-              placeholder="Vain toinen pääsee, avecin nimi etc"
-              defaultValue={data.extra_info ? data.extra_info : ""}
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full rounded-lg bg-green-600 px-5 py-2 text-center text-sm font-medium text-white transition duration-200 hover:bg-green-700 dark:bg-cyan-400 dark:text-black dark:hover:bg-cyan-500"
-          >
-            Tallenna
-          </button>
-        </form>
-      </div>
-    </div>
-  );
 }
