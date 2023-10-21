@@ -13,6 +13,7 @@ export default function ToggleButton({
         <input
           type="checkbox"
           id={id}
+          name={id}
           value=""
           className="peer sr-only"
           defaultChecked={checked ? true : false}
