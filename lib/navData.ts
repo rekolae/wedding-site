@@ -6,6 +6,5 @@ export const navData: Array<Array<String>> = [
   ["Ohjelma", "programme", "/ohjelma"],
   ["Galleria", "gallery", "/galleria"],
   ["Saapumisohjeet", "arrival", "/saapuminen"],
-  ["Muistaminen", "gifts", "/muistaminen"],
-  ["Kirjaudu", "login", "/kirjaudu"]
+  ["Muistaminen", "gifts", "/muistaminen"]
 ];
