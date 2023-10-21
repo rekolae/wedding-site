@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-forest-green dark:bg-dark-blueish-gray min-w-[400px] text-black antialiased dark:text-white">
+      <body className="min-w-[400px] bg-forest-green text-black antialiased dark:bg-dark-blueish-gray dark:text-white">
         <Navigation />
         <main
           id="main-content"
