@@ -93,12 +93,10 @@ export default function NavLinks({
         )}
         {!isAuthenticated ? null : (
           <li
-            key="admin"
-            className={`w-min transform p-1 px-2 transition duration-300 ${
-              "/admin" === pathname
-                ? "text-black underline underline-offset-2 dark:text-purple-400"
-                : "text-white hover:translate-x-1 hover:text-teal-400 dark:hover:text-cyan-400"
-            }`}
+            key="logout"
+            className={
+              "w-min transform p-1 px-2 text-white transition duration-300 hover:translate-x-1 hover:text-teal-400 dark:hover:text-cyan-400"
+            }
           >
             <button
               onClick={() => {

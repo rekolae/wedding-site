@@ -38,7 +38,7 @@ export default function Admin() {
       }
       setLoaded(true);
     }
-  });
+  }, []);
 
   if (!isLoaded) {
     return (
@@ -57,7 +57,10 @@ export default function Admin() {
         <div className="flex flex-col">
           {records?.map((record) => {
             return (
-              <div className="mx-auto mb-4 w-[350px] rounded-lg border border-gray-200 bg-white shadow-xl dark:border-cyan-800 dark:bg-very-dark-blue dark:shadow-cyan-900">
+              <div
+                key={record.id}
+                className="mx-auto mb-4 w-[350px] rounded-lg border border-gray-200 bg-white shadow-xl dark:border-cyan-800 dark:bg-very-dark-blue dark:shadow-cyan-900"
+              >
                 <h2 className="mt-4 text-center text-lg font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
                   {record.expand?.respondents.length == 2
                     ? `${record.expand?.respondents.at(0)
