@@ -36,6 +36,11 @@ next-env.d.ts
 
 # VS Code
 *.code-workspace
+.vscode
 
 # Public images
 /public/*
+
+# User record uploader
+/scripts/user_records.txt
+/scripts/user_record_uploader.py
