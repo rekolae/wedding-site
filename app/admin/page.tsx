@@ -24,7 +24,7 @@ export default function Admin() {
       //let records = null;
 
       if (pb.authStore.isAdmin) {
-        fetch("http://localhost:3000/api/rsvp/getAll", {
+        fetch("/api/rsvp/getAll", {
           cache: "no-store",
           headers: {
             token: pb.authStore.token

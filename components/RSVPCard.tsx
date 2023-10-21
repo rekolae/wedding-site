@@ -63,7 +63,7 @@ export default function RSVPCard() {
         //console.log("AUTHENTICATED AS " + pb.authStore.model?.name);
       }
 
-      let response = await fetch("http://localhost:3000/api/rsvp/getOne", {
+      let response = await fetch("/api/rsvp/getOne", {
         cache: "no-store",
         headers: {
           token: pb.authStore.token,
