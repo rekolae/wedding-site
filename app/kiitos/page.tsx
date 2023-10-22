@@ -7,7 +7,7 @@ export default function ThankYou() {
   const router = useRouter();
   useEffect(() => {
     setTimeout(() => router.push("/"), 5000);
-  }, []);
+  });
 
   return (
     <section id="thanks-section" className="section-primary">

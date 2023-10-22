@@ -32,7 +32,7 @@ export default function Admin() {
       }
       setLoaded(true);
     }
-  }, []);
+  }, [isLoaded]);
 
   if (!isLoaded) {
     return (
