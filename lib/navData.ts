@@ -4,7 +4,7 @@ export const navData: Array<Array<String>> = [
   ["Koti", "home", "/"],
   ["Ruokalista", "menu", "/menu"],
   ["Ohjelma", "programme", "/ohjelma"],
-  ["Galleria", "gallery", "/galleria"],
+  //["Galleria", "gallery", "/galleria"],
   ["Saapumisohjeet", "arrival", "/saapuminen"],
   ["Muistaminen", "gifts", "/muistaminen"]
 ];

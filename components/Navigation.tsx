@@ -16,7 +16,7 @@ export default function Navigation() {
         className=" mx-2 my-1 flex max-w-3xl transform flex-col rounded bg-white p-1  blur-none transition duration-500 dark:bg-very-dark-blue"
       >
         <div className="m-1 flex">
-          <div className="absolute bottom-0">
+          <div className="absolute left-1 top-1 h-8 w-8">
             <button
               type="button"
               className="transition duration-300 hover:scale-110"
