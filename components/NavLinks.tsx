@@ -24,7 +24,7 @@ export default function NavLinks({
     const pb = initPb();
     setAdmin(pb.authStore.isAdmin);
     setAuthenticated(pb.authStore.isValid);
-  }, []);
+  }, [open]);
 
   return (
     <div>
