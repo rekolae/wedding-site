@@ -5,8 +5,7 @@ import { initPb } from "@/lib/pbHelpers";
 
 type LoginFormState = {
   message: string | null;
-  //count: number;
-  //error: boolean | null;
+  error: boolean | null;
   token: string | null;
   model: AuthModel | null;
 };
@@ -18,9 +17,6 @@ export async function updateRSVP(
   const RSVPId = formData.get("RSVP-ID")?.toString() || "";
   const foodRestrictions = formData.get("food-limitations")?.toString() || "";
   const extraInfo = formData.get("extra-info")?.toString() || "";
-  //console.log(RSVPId, extraInfo);
-  //console.dir(formData);
-
   const pb = initPb();
 
   const data = {
@@ -30,6 +26,7 @@ export async function updateRSVP(
     extra_info: extraInfo
   };
 
+  pb.authStore.save(prevState.token || "", prevState.model);
   let record = null;
 
   try {
@@ -39,7 +36,8 @@ export async function updateRSVP(
     console.log(err);
     return {
       ...prevState,
-      message: "Fuck"
+      error: true,
+      message: "Päivitys epäonnistui"
     };
   }
 
@@ -50,6 +48,7 @@ export async function updateRSVP(
 
   return {
     ...prevState,
-    message: "Data received!"
+    error: false,
+    message: "RSVP päivitetty!"
   };
 }

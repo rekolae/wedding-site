@@ -18,17 +18,34 @@ export default function Home() {
 
   return (
     <section id="home-section" className="section-primary">
-      <h1 className="h1-header font-serif italic text-3xl font-normal">
+      <h1 className="h1-header font-serif text-4xl font-normal italic">
         Tervetuloa!
       </h1>
-      <h2 className="mt-4 mb-4 text-center text-base tracking-tighter">Juhlan alkuun aikaa:</h2>
+      <h2 className="mb-4 mt-4 text-center text-xl tracking-tighter">
+        Juhlan alkuun aikaa:
+      </h2>
       <CountDownTimer />
 
       {isAuthenticated && !isAdmin ? (
-        <div className="my-2">
-          <RSVPCard />
-        </div>
-      ) : null}
+        <>
+          <div className="my-2">
+            <RSVPCard />
+          </div>
+          <p className="p-text">
+            Tallennathan yllä olevaan lomakkeeseen tiedon osallistumisestasi
+            hääjuhlaan. Lisää myös mahdolliset muut lisätiedot (allergiat,
+            avecin nimi ym.). Lomake on pariskunta/perhekohtainen, joten jos
+            joku kutsussa nimellä mainituista henkilöistä ei pääse
+            osallistumaan, ilmoitathan myös sen lisätiedoissa. Voit muokata
+            ilmoittautumista ja lisätietoja 15.1.2024 asti.
+          </p>
+        </>
+      ) : (
+        <p className="p-text">
+          Kirjautumalla sisään Kirjaudu-sivulta pääset muokkaamaan RSVP:n
+          tietoja ja näkemään muun sisällön.
+        </p>
+      )}
 
       {isAdmin ? (
         <div className="my-4">
@@ -36,13 +53,6 @@ export default function Home() {
         </div>
       ) : null}
 
-      <p className="text-center">
-        Tallennathan yllä olevaan lomakkeeseen tiedon osallistumisestasi hääjuhlaan. Lisää
-        myös mahdolliset muut lisätiedot (allergiat, avecin nimi ym.). Lomake on 
-        pariskunta/perhekohtainen, joten jos joku kutsussa nimellä mainituista henkilöistä 
-        ei pääse osallistumaan, ilmoitathan myös sen lisätiedoissa. Voit muokata
-        ilmoittautumista ja lisätietoja 15.1.2024 asti.
-      </p>
       <ImageGrid />
     </section>
   );

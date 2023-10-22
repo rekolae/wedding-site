@@ -19,9 +19,6 @@ export default function Admin() {
     if (!isLoaded) {
       const pb = initPb();
       setAdmin(pb.authStore.isAdmin);
-      //setAdmin(true);
-
-      //let records = null;
 
       if (pb.authStore.isAdmin) {
         fetch("/api/rsvp/getAll", {
@@ -32,9 +29,6 @@ export default function Admin() {
         })
           .then((response) => response.json())
           .then((data) => setRecords(data));
-
-        //console.dir(records);
-        //setRecords(records);
       }
       setLoaded(true);
     }
@@ -43,17 +37,15 @@ export default function Admin() {
   if (!isLoaded) {
     return (
       <section id="admin-section" className="section-primary">
-        <h1 className="h1-header">Admin page</h1>
+        <h1 className="h1-header text-3xl font-normal">Admin page</h1>
         <LoadingCircle />
       </section>
     );
   } else if (isAdmin) {
     return (
       <section id="admin-section" className="section-primary">
-        <h1 className="h1-header">Admin page</h1>
-        <h2 className="mb-6 text-center text-2xl tracking-tighter">
-          Work In Progress
-        </h2>
+        <h1 className="h1-header text-3xl font-normal">Admin page</h1>
+        <p className="p-text">Kutsujen RSVP tiedot</p>
         <div className="flex flex-col">
           {records?.map((record) => {
             return (

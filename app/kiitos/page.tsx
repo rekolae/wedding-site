@@ -11,7 +11,7 @@ export default function ThankYou() {
 
   return (
     <section id="thanks-section" className="section-primary">
-      <h1 className="h1-header">Kiitos vierailusta!</h1>
+      <h1 className="h1-header text-3xl font-normal">Kiitos vierailusta!</h1>
       <h2 className="mb-6 text-center text-2xl tracking-tighter">
         Toivottavasti nähdään häissä!
       </h2>

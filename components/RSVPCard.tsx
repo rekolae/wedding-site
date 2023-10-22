@@ -16,17 +16,14 @@ import { AuthModel } from "pocketbase";
 
 type LoginFormState = {
   message: string | null;
-  //count: number;
-  //error: boolean | null;
+  error: boolean | null;
   token: string | null;
   model: AuthModel | null;
 };
 
 const initialState: LoginFormState = {
   message: null,
-  //count: 0,
-  //error: null,
-  //authdata: null
+  error: null,
   token: initPb().authStore.token,
   model: initPb().authStore.model
 };
@@ -38,7 +35,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full rounded-lg bg-green-600 px-5 py-2.5 text-center text-sm font-medium text-white transition duration-200 enabled:hover:scale-105 enabled:hover:bg-green-700 disabled:bg-cyan-800 dark:bg-cyan-400 dark:text-black enabled:dark:hover:bg-cyan-500"
+      className="w-full rounded-lg bg-green-600 px-5 py-2.5 text-center text-sm font-medium text-white transition duration-200 enabled:hover:scale-105 enabled:hover:bg-green-700 disabled:bg-green-800 dark:bg-cyan-400 dark:text-black enabled:dark:hover:bg-cyan-500 dark:disabled:bg-cyan-800"
     >
       {pending ? "Tallennetaan..." : "Tallenna"}
     </button>
@@ -100,22 +97,6 @@ export default function RSVPCard() {
     return () => clearTimeout(timer);
   }, [state]);
 
-  /*
-  console.log(
-    `BEFORE IF AUTHSTORE VALID: ${
-      new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL!).authStore.isValid
-        ? "VALID!"
-        : "INVALID!"
-    }`
-  );
-  */
-
-  /*
-  if (state.message) {
-    setTimeout(() => setShowMsg(false), 5000);
-  }
-  */
-
   if (isLoading) {
     return <RSVPSkeleton />;
   } else {
@@ -133,8 +114,12 @@ export default function RSVPCard() {
         <div className="px-6 py-4">
           <div
             id="status-message-update"
-            className={`mb-4 overflow-hidden rounded-lg bg-green-700 transition-[height] duration-200 ${
+            className={`mb-4 overflow-hidden rounded-lg text-white transition-[height] duration-200 dark:text-black ${
               showMsg ? "h-6" : "h-0"
+            } ${
+              state?.error != null && state?.error
+                ? "bg-red-600"
+                : "bg-green-600"
             }`}
           >
             <h3 className="text-center">{state?.message}</h3>
@@ -163,7 +148,7 @@ export default function RSVPCard() {
                 name="food-limitations"
                 id="food-limitations"
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                placeholder="Laktoosi-intoleranssi, gluteeniton etc"
+                placeholder="Laktoositon, gluteeniton jne."
                 defaultValue={
                   data?.food_restrictions ? data?.food_restrictions : ""
                 }
@@ -181,7 +166,7 @@ export default function RSVPCard() {
                 name="extra-info"
                 id="extra-info"
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                placeholder="Vain toinen pääsee, avecin nimi etc"
+                placeholder="Vain toinen pääsee, avecin nimi jne."
                 defaultValue={data?.extra_info ? data?.extra_info : ""}
               />
             </div>

@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       animation: {
         // Animation: Keyframe-name Duration Movement-func Repeat
-        backgroundGradient: "bg 3s ease infinite",
+        backgroundGradient: "bg 5s ease infinite",
       },
       keyframes: {
         bg: {
@@ -30,7 +30,7 @@ module.exports = {
         "dark-steel": "#3a424c",
         "very-dark-blue": "#1f2933",
         "dark-blue": "#161d23"
-      },
+      }, 
     },
   },
   plugins: [],

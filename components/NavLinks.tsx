@@ -18,6 +18,7 @@ export default function NavLinks({
   const [isAdmin, setAdmin] = useState(false);
   const [isAuthenticated, setAuthenticated] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const pb = initPb();
@@ -25,52 +26,42 @@ export default function NavLinks({
     setAuthenticated(pb.authStore.isValid);
   });
 
-  const pathname = usePathname();
   return (
     <div>
       <ul>
         {navData.map((pageData) => {
-          return (
-            <li
-              key={pageData[1] as Key}
-              className={`w-min transform p-1 px-2 transition duration-300 ${
-                pageData[2] === pathname
-                  ? "text-black underline underline-offset-2 dark:text-purple-400"
-                  : "text-white hover:translate-x-1 hover:text-teal-400 dark:hover:text-cyan-400"
-              }`}
-            >
-              <Link
-                onClick={() => {
-                  blurBackground(!open);
-                  setOpen((open) => !open);
-                }}
-                href={pageData[2] as Url}
+          /* pageData[3] is null, true or false
+           * null  -> Render the link always
+           * true  -> Render when authenticated
+           * false -> Render when not authenticated
+           */
+          if (
+            pageData[3] === null ||
+            (pageData[3] && isAuthenticated) ||
+            (!pageData[3] && !isAuthenticated)
+          ) {
+            return (
+              <li
+                key={pageData[1] as Key}
+                className={`w-min transform p-1 px-2 transition duration-300 ${
+                  pageData[2] === pathname
+                    ? "text-black underline underline-offset-2 dark:text-purple-400"
+                    : "text-white hover:translate-x-1 hover:text-black dark:hover:text-cyan-400"
+                }`}
               >
-                {pageData[0] as String}
-              </Link>
-            </li>
-          );
+                <Link
+                  onClick={() => {
+                    blurBackground(!open);
+                    setOpen((open) => !open);
+                  }}
+                  href={pageData[2] as Url}
+                >
+                  {pageData[0] as String}
+                </Link>
+              </li>
+            );
+          }
         })}
-        {isAuthenticated ? null : (
-          <li
-            key="kirjaudu"
-            className={`w-min transform p-1 px-2 transition duration-300 ${
-              "/kirjaudu" === pathname
-                ? "text-black underline underline-offset-2 dark:text-purple-400"
-                : "text-white hover:translate-x-1 hover:text-teal-400 dark:hover:text-cyan-400"
-            }`}
-          >
-            <Link
-              onClick={() => {
-                blurBackground(!open);
-                setOpen((open) => !open);
-              }}
-              href={"/kirjaudu"}
-            >
-              Kirjaudu
-            </Link>
-          </li>
-        )}
         {!isAdmin ? null : (
           <li
             key="admin"
@@ -99,12 +90,12 @@ export default function NavLinks({
             }
           >
             <button
+              className="w-44 text-left"
               onClick={() => {
                 blurBackground(!open);
                 setOpen((open) => !open);
                 initPb().authStore.clear();
                 router.push("/kiitos");
-                //router.refresh();
               }}
             >
               Kirjaudu ulos

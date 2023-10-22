@@ -44,14 +44,10 @@ export async function loginUser(prevState: FormState, formData: FormData) {
   if (!authData) {
     let msg;
 
-    if (prevState.count > 0) {
-      if (prevState.count > 3) {
-        msg = `Login failed ${prevState.count + 1} times, contact admin!`;
-      } else {
-        msg = `Login failed ${prevState.count + 1} times!`;
-      }
+    if (prevState.count > 3) {
+      msg = "Kirjautuminen epäonnistui, ota yhteyttä Emiliin!";
     } else {
-      msg = "Login failed!";
+      msg = "Kirjautuminen epäonnistui!";
     }
 
     const result: FormState = {
@@ -64,7 +60,7 @@ export async function loginUser(prevState: FormState, formData: FormData) {
     return result;
   } else {
     const result: FormState = {
-      message: "Login success!",
+      message: "Kirjautuminen onnistui!",
       count: 0,
       error: false,
       authdata: authData

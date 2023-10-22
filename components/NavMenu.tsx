@@ -11,9 +11,9 @@ export default function NavMenu({
   return (
     <>
       <div
-        className={`dark:bg-dark-blue fixed left-0 top-0 z-10 h-full
-        transform rounded-r-lg border-2 border-black bg-emerald-900 text-3xl
-        transition duration-500 dark:border-cyan-950 ${
+        className={`fixed left-0 top-0 z-10 h-full w-60 transform
+        rounded-r-lg border-2 border-black bg-emerald-600 text-3xl transition
+        duration-500 dark:border-cyan-950 dark:bg-dark-blue ${
           open ? "translate-x-0" : "-translate-x-64"
         }
         `}

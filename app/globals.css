@@ -4,10 +4,14 @@
 
 @layer base {
   .section-primary {
-    @apply dark:bg-very-dark-blue m-2 flex flex-auto transform flex-col rounded bg-white px-2 py-1;
+    @apply m-2 flex flex-auto transform flex-col rounded bg-white px-2 py-1 dark:bg-very-dark-blue;
   }
 
   .h1-header {
     @apply mx-auto max-w-3xl text-center text-2xl font-bold tracking-tighter text-teal-700 dark:text-cyan-300;
+  }
+
+  .p-text {
+    @apply mb-6 mt-2 text-center text-lg tracking-tighter;
   }
 }

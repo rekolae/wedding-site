@@ -1,7 +1,7 @@
 export default function Gallery() {
   return (
     <section id="gallery-section" className="section-primary">
-      <h1 className="h1-header">
+      <h1 className="h1-header text-3xl font-normal">
         Siit leiate Tallinki meeldejäävad reisifotod
       </h1>
       <h2 className="mb-6 text-center text-2xl tracking-tighter">📸🤳</h2>

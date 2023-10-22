@@ -5,10 +5,8 @@ export default function Programme() {
   return (
     <>
       <section id="programme-section" className="section-primary">
-        <h1 className="h1-header">Ohjelma</h1>
-        <h2 className="mb-6 text-center text-2xl tracking-tighter">
-          Work In Progress
-        </h2>
+        <h1 className="h1-header text-3xl font-normal">Ohjelma</h1>
+        <p className="p-text">Alla on suuntaa antava aikataulu</p>
         <div className="">
           <div className="mx-auto min-w-fit max-w-sm">
             <table className="mb-2 w-full border-collapse border border-slate-400 bg-white text-sm shadow-sm dark:border-slate-500 dark:bg-slate-800">
