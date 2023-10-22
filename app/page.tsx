@@ -53,6 +53,12 @@ export default function Home() {
         </div>
       ) : null}
 
+      <p className="p-text">
+        Mozilla Firefoxilla on ongelmia näyttää osa kuvista, nettisivua
+        kannattaa käyttää millä tahansa muulla selaimella parhaan kokemuksen
+        saavuttamiseksi.
+      </p>
+      <p className="p-text text-5xl">🦊🔫</p>
       <ImageGrid />
     </section>
   );
