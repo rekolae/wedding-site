@@ -16,7 +16,7 @@ export default function ImageGrid() {
           fill
           sizes="(max-width: 768px) 213px, 33vw"
           priority
-          className="rounded-md object-cover object-center"
+          className="rounded-md object-cover object-top"
         />
       </div>
       <div className="relative mb-4 h-80 transform shadow-xl transition-transform duration-300 dark:shadow-lg dark:shadow-cyan-900 sm:mb-0 lg:hover:scale-105">
@@ -52,7 +52,7 @@ export default function ImageGrid() {
       <div className="relative mb-4 h-40 transform shadow-xl transition-transform duration-300 dark:shadow-lg dark:shadow-cyan-900 lg:hover:scale-105">
         <Image
           alt=""
-          src={img6}
+          src={img5}
           fill
           sizes="(max-width: 768px) 213px, 33vw"
           priority
@@ -62,7 +62,7 @@ export default function ImageGrid() {
       <div className="relative h-80 transform shadow-xl transition-transform duration-300 dark:shadow-lg dark:shadow-cyan-900 lg:hover:scale-105">
         <Image
           alt=""
-          src={img5}
+          src={img6}
           fill
           sizes="(max-width: 768px) 213px, 33vw"
           priority
