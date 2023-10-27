@@ -29,17 +29,11 @@ export async function loginUser(prevState: FormState, formData: FormData) {
         .authWithPassword(user, pw, { cache: "no-cache" });
     }
   } catch (err) {
-    console.error(`${"#".repeat(120)}\n${err}\n${"#".repeat(120)}`);
+    console.error(`\n${"#".repeat(120)}\n${err}\n${"#".repeat(120)}\n`);
   }
 
-  /*
-  console.log("#".repeat(120));
-  console.dir(authData, { depth: null });
-  console.log("#".repeat(120));
-  */
-
   // Atrificial  delay
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 500));
 
   if (!authData) {
     let msg;

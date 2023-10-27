@@ -43,7 +43,6 @@ function SubmitButton() {
 }
 
 export default function RSVPCard() {
-  //const data: RSVPResponse<Texpand> | null = await getRSVPData();
   const [data, setData] = useState<RSVPResponse<Texpand> | null>(null);
   const [state, formAction] = useFormState(updateRSVP, initialState);
   const [showMsg, setShowMsg] = useState(false);
@@ -54,10 +53,7 @@ export default function RSVPCard() {
       const pb = initPb();
 
       if (!pb.authStore.isValid) {
-        //console.log("Auth failed!");
         return null;
-      } else {
-        //console.log("AUTHENTICATED AS " + pb.authStore.model?.name);
       }
 
       let response = await fetch("/api/rsvp/getOne", {
@@ -70,14 +66,11 @@ export default function RSVPCard() {
 
       const record = await response.json();
 
-      //console.dir(record);
-
       // Artificial delay for loading skeleton testing and visualizing
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       setData(record);
       setLoading(false);
-      //return record;
     }
 
     getRSVPData().catch(console.error);
@@ -132,7 +125,8 @@ export default function RSVPCard() {
                 id="arriving"
                 checked={data?.attending || false}
               />
-              {data?.respondents.length == 1 ? (
+              {data?.respondents.length == 1 &&
+              data?.expand?.respondents.at(0)?.name != "Joonas Kleemola" ? (
                 <ToggleButton text="Avec" id="avec" checked={data.avec} />
               ) : null}
             </div>

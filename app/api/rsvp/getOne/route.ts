@@ -16,7 +16,6 @@ export async function GET(request: NextRequest) {
   pb.authStore.save(token, model);
 
   if (pb.authStore.isValid) {
-    //console.log(`VALID user ${pb.authStore.model?.name}!`);
     const record = await pb
       .collection(Collections.RSVP)
       .getFirstListItem<RSVPResponse<Texpand>>(

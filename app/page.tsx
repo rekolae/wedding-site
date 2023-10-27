@@ -58,7 +58,6 @@ export default function Home() {
         kannattaa käyttää millä tahansa muulla selaimella parhaan kokemuksen
         saavuttamiseksi.
       </p>
-      <p className="p-text text-5xl">🦊🔫</p>
       <ImageGrid />
     </section>
   );

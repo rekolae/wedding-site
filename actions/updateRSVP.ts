@@ -32,7 +32,6 @@ export async function updateRSVP(
   try {
     record = await pb.collection("RSVP").update(RSVPId, data);
   } catch (err) {
-    console.log("FUCK");
     console.log(err);
     return {
       ...prevState,
@@ -41,10 +40,8 @@ export async function updateRSVP(
     };
   }
 
-  //console.dir(record);
-
   // Atrificial  delay
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 500));
 
   return {
     ...prevState,

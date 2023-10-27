@@ -42,9 +42,6 @@ export function LoginForm() {
   const router = useRouter();
 
   if (state?.error !== null && !state?.error) {
-    //console.log("Inside mystery if when success");
-    //console.dir(state);
-
     let pb = initPb();
     pb.authStore.save(state.authdata.token, state.authdata.record);
 
