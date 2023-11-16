@@ -6,8 +6,9 @@ export default function Programme() {
     <>
       <section id="programme-section" className="section-primary">
         <h1 className="h1-header text-3xl font-normal">Ohjelma</h1>
-        <p className="p-text">Alla on suuntaa antava aikataulu</p>
-        <div className="">
+        <p className="p-text">Ohjelma tarkentuu myöhemmin</p>
+        {/*
+          <div className="">
           <div className="mx-auto min-w-fit max-w-sm">
             <table className="mb-2 w-full border-collapse border border-slate-400 bg-white text-sm shadow-sm dark:border-slate-500 dark:bg-slate-800">
               <thead className="bg-slate-50 dark:bg-slate-700">
@@ -43,6 +44,7 @@ export default function Programme() {
             </table>
           </div>
         </div>
+              */}
       </section>
     </>
   );
