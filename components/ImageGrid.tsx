@@ -5,70 +5,64 @@ import img3 from "@/public/img3.jpg";
 import img4 from "@/public/img4.jpg";
 import img5 from "@/public/img5.jpg";
 import img6 from "@/public/img6.jpg";
+import img7 from "@/public/img7.jpg";
 
 export default function ImageGrid() {
   return (
-    <div className="mx-2 my-8 columns-2 gap-4 sm:columns-3">
-      <div className="relative mb-4 h-40 transform shadow-xl transition-transform duration-300 dark:shadow-lg dark:shadow-cyan-900 lg:hover:scale-105">
-        <Image
-          alt=""
-          src={img1}
-          fill
-          sizes="(max-width: 768px) 213px, 33vw"
-          priority
-          className="rounded-md object-cover object-top"
-        />
+    <section className="mx-2 my-8">
+      <div className="relative">
+        <div className="relative columns-2 gap-4 sm:columns-3">
+          <div className="relative transform transition-transform duration-300 lg:hover:scale-105 dark:shadow-lg dark:shadow-cyan-900">
+            <Image
+              className="w-full rounded-lg object-cover"
+              alt="hue"
+              src={img1}
+            />
+          </div>
+          <div className="relative mt-4 transform transition-transform duration-300 lg:hover:scale-105 dark:shadow-lg dark:shadow-cyan-900">
+            <Image
+              className="w-full rounded-lg object-cover"
+              alt="hue"
+              src={img2}
+            />
+          </div>
+          <div className="relative mt-4 transform transition-transform duration-300 lg:hover:scale-105 dark:shadow-lg dark:shadow-cyan-900">
+            <Image
+              className="w-full rounded-lg object-cover"
+              alt="hue"
+              src={img3}
+            />
+          </div>
+          <div className="relative mt-4 transform transition-transform duration-300 lg:hover:scale-105 dark:shadow-lg dark:shadow-cyan-900">
+            <Image
+              className="w-full rounded-lg object-cover"
+              alt="hue"
+              src={img4}
+            />
+          </div>
+          <div className="relative mt-4 transform transition-transform duration-300 lg:hover:scale-105 dark:shadow-lg dark:shadow-cyan-900">
+            <Image
+              className="w-full rounded-lg object-cover"
+              alt="hue"
+              src={img7}
+            />
+          </div>
+          <div className="relative mt-4 transform transition-transform duration-300 lg:hover:scale-105 dark:shadow-lg dark:shadow-cyan-900">
+            <Image
+              className="w-full rounded-lg object-cover"
+              alt="hue"
+              src={img5}
+            />
+          </div>
+          <div className="relative mt-4 transform transition-transform duration-300 lg:hover:scale-105 dark:shadow-lg dark:shadow-cyan-900">
+            <Image
+              className="w-full rounded-lg object-cover"
+              alt="hue"
+              src={img6}
+            />
+          </div>
+        </div>
       </div>
-      <div className="relative mb-4 h-80 transform shadow-xl transition-transform duration-300 dark:shadow-lg dark:shadow-cyan-900 sm:mb-0 lg:hover:scale-105">
-        <Image
-          alt=""
-          src={img2}
-          fill
-          sizes="(max-width: 768px) 213px, 33vw"
-          priority
-          className="rounded-md object-cover object-center"
-        />
-      </div>
-      <div className="relative h-40 transform shadow-xl transition-transform duration-300 dark:shadow-lg dark:shadow-cyan-900 sm:mb-4 sm:h-80 lg:hover:scale-105">
-        <Image
-          alt="Loki tired"
-          src={img3}
-          fill
-          sizes="(max-width: 768px) 213px, 33vw"
-          priority
-          className="rounded-md object-cover object-bottom"
-        />
-      </div>
-      <div className="relative mb-4 h-40 transform shadow-xl transition-transform duration-300 dark:shadow-lg dark:shadow-cyan-900 sm:mb-0 lg:hover:scale-105">
-        <Image
-          alt="Loki see many far"
-          src={img4}
-          fill
-          sizes="(max-width: 768px) 213px, 33vw"
-          priority
-          className="rounded-md object-cover object-center"
-        />
-      </div>
-      <div className="relative mb-4 h-40 transform shadow-xl transition-transform duration-300 dark:shadow-lg dark:shadow-cyan-900 lg:hover:scale-105">
-        <Image
-          alt=""
-          src={img5}
-          fill
-          sizes="(max-width: 768px) 213px, 33vw"
-          priority
-          className="rounded-md object-cover object-center"
-        />
-      </div>
-      <div className="relative h-80 transform shadow-xl transition-transform duration-300 dark:shadow-lg dark:shadow-cyan-900 lg:hover:scale-105">
-        <Image
-          alt=""
-          src={img6}
-          fill
-          sizes="(max-width: 768px) 213px, 33vw"
-          priority
-          className="rounded-md object-cover object-center"
-        />
-      </div>
-    </div>
+    </section>
   );
 }

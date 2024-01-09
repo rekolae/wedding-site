@@ -1,9 +1,7 @@
 "use client";
 
-//@ts-ignore
-import { experimental_useFormState as useFormState } from "react-dom";
-//@ts-ignore
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
+import { useFormStatus } from "react-dom";
 import { loginUser } from "@/actions/loginUser";
 import { RecordAuthResponse, RecordModel, AdminAuthResponse } from "pocketbase";
 import { initPb } from "@/lib/pbHelpers";
@@ -40,10 +38,10 @@ function SubmitButton() {
 export function LoginForm() {
   const [state, formAction] = useFormState(loginUser, initialState);
   const router = useRouter();
+  let pb = initPb();
 
   if (state?.error !== null && !state?.error) {
-    let pb = initPb();
-    pb.authStore.save(state.authdata.token, state.authdata.record);
+    pb.authStore.save(state.authdata!.token, state.authdata!.record);
 
     // Redirect after 1 second
     setTimeout(() => router.push("/"), 1000);

@@ -1,14 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { initPb } from "@/lib/pbHelpers";
 import LoadingCircle from "@/components/LoadingCircle";
 import ToggleButton from "@/components/ToggleButton";
 import { RSVPResponse } from "@/types/pocketbase-types";
 import { type ExpandWithRespondents as Texpand } from "@/types/pb-types-extension";
-import { getTokenPayload } from "pocketbase";
 
 export default function Admin() {
+  const router = useRouter();
   const [isAdmin, setAdmin] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
   const [records, setRecords] = useState<Array<RSVPResponse<Texpand>> | null>(
@@ -81,12 +82,13 @@ export default function Admin() {
                     >
                       Ruokarajoitteet
                     </label>
-                    <input
-                      type="text"
+                    <textarea
                       name="food-limitations"
                       id="food-limitations"
+                      readOnly
+                      rows={1}
                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                      placeholder="Laktoosi-intoleranssi, gluteeniton etc"
+                      placeholder="Laktoositon, gluteeniton jne."
                       defaultValue={
                         record.food_restrictions ? record.food_restrictions : ""
                       }
@@ -99,12 +101,13 @@ export default function Admin() {
                     >
                       Lisätietoa
                     </label>
-                    <input
-                      type="text"
+                    <textarea
                       name="extra-info"
                       id="extra-info"
+                      readOnly
+                      rows={1}
                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                      placeholder="Vain toinen pääsee, avecin nimi etc"
+                      placeholder="Vain toinen pääsee, avecin nimi jne."
                       defaultValue={record.extra_info ? record.extra_info : ""}
                     />
                   </div>
@@ -116,12 +119,19 @@ export default function Admin() {
       </section>
     );
   } else {
+    setTimeout(() => router.push("/"), 2500);
+
     return (
       <section id="admin-section" className="section-primary">
-        <h1 className="h1-header">403 - ACCESS DENIED</h1>
-        <h2 className="mb-6 text-center text-2xl tracking-tighter">
-          YOU SHALL NOT PASS
-        </h2>
+        <h1 className="h1-header text-3xl font-normal">Admin page</h1>
+        <div className="mb-4 mt-2">
+          <h1 className="text-center text-2xl tracking-tighter">
+            403 - ACCESS DENIED
+          </h1>
+          <h2 className="text-center text-2xl tracking-tighter">
+            YOU SHALL NOT PASS
+          </h2>
+        </div>
       </section>
     );
   }

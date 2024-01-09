@@ -6,7 +6,17 @@ export default function Programme() {
     <>
       <section id="programme-section" className="section-primary">
         <h1 className="h1-header text-3xl font-normal">Ohjelma</h1>
-        <p className="p-text">Ohjelma tarkentuu myöhemmin</p>
+        <p className="p-text">Ohjelman aikataulu tarkentuu myöhemmin.</p>
+        <div className="mx-auto mb-4 text-center text-lg font-normal">
+          <p>Juhla alkaa klo 15.30</p>
+          <p>Alkumalja</p>
+          <p>Ruokailu</p>
+          <p>Puheita</p>
+          <p>Kahvia ja kakkua</p>
+          <p>Ensimmäinen tanssi</p>
+          <p>Musiikkia, tanssia ja pelejä</p>
+          <p>Iltapala</p>
+        </div>
         {/*
           <div className="">
           <div className="mx-auto min-w-fit max-w-sm">

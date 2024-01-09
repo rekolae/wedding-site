@@ -62,7 +62,7 @@ export default function NavLinks({
             );
           }
         })}
-        {!isAdmin ? null : (
+        {isAdmin && isAuthenticated ? (
           <li
             key="admin"
             className={`w-min transform p-1 px-2 transition duration-300 ${
@@ -81,7 +81,7 @@ export default function NavLinks({
               Dashboard
             </Link>
           </li>
-        )}
+        ) : null}
         {!isAuthenticated ? null : (
           <li
             key="logout"

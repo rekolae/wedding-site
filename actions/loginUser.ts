@@ -32,8 +32,8 @@ export async function loginUser(prevState: FormState, formData: FormData) {
     console.error(`\n${"#".repeat(120)}\n${err}\n${"#".repeat(120)}\n`);
   }
 
-  // Atrificial  delay
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  // Artificial delay
+  await new Promise((resolve) => setTimeout(resolve, 250));
 
   if (!authData) {
     let msg;

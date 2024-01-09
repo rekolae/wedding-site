@@ -2,6 +2,7 @@
 
 import Navigation from "@/components/Navigation";
 import "./globals.css";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "E&A häät 2023",
@@ -23,6 +24,9 @@ export default function RootLayout({
         >
           {children}
         </main>
+        {/*
+          <Footer />
+        */}
       </body>
     </html>
   );

@@ -1,15 +1,12 @@
 "use client";
 
 import ToggleButton from "./ToggleButton";
-import PocketBase from "pocketbase";
-import { Collections, RSVPResponse } from "@/types/pocketbase-types";
+import { RSVPResponse } from "@/types/pocketbase-types";
 import { ExpandWithRespondents as Texpand } from "@/types/pb-types-extension";
 import { useEffect, useState } from "react";
 import RSVPSkeleton from "./RSVPSkeleton";
-//@ts-ignore
-import { experimental_useFormState as useFormState } from "react-dom";
-//@ts-ignore
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
+import { useFormStatus } from "react-dom";
 import { updateRSVP } from "@/actions/updateRSVP";
 import { initPb } from "@/lib/pbHelpers";
 import { AuthModel } from "pocketbase";
@@ -137,10 +134,10 @@ export default function RSVPCard() {
               >
                 Ruokarajoitteet
               </label>
-              <input
-                type="text"
+              <textarea
                 name="food-limitations"
                 id="food-limitations"
+                rows={1}
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Laktoositon, gluteeniton jne."
                 defaultValue={
@@ -155,10 +152,10 @@ export default function RSVPCard() {
               >
                 Lisätietoa
               </label>
-              <input
-                type="text"
+              <textarea
                 name="extra-info"
                 id="extra-info"
+                rows={1}
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Vain toinen pääsee, avecin nimi jne."
                 defaultValue={data?.extra_info ? data?.extra_info : ""}

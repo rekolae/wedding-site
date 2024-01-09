@@ -13,7 +13,7 @@ export default function Arriving() {
         strutsitilan kyltti, jota seuraamalla käännytte Lahdentieltä oikeaan
         suuntaan.
       </p>
-      <div className="rounded-lg border border-gray-200 p-[2px] shadow-lg dark:animate-backgroundGradient dark:border-none dark:bg-gradient-to-r dark:from-teal-500 dark:via-purple-500 dark:to-orange-500 dark:shadow-cyan-700">
+      <div className="mb-1 rounded-lg border border-gray-200 p-[2px] shadow-lg dark:animate-backgroundGradient dark:border-none dark:bg-gradient-to-r dark:from-teal-500 dark:via-purple-500 dark:to-orange-500 dark:shadow-cyan-700">
         <div className="rounded bg-white p-[1px] dark:bg-very-dark-blue">
           <iframe
             src={process.env.MAPS_ADDR!}
