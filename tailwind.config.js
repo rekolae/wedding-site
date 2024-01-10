@@ -11,6 +11,9 @@ module.exports = {
       animation: {
         // Animation: Keyframe-name Duration Movement-func Repeat
         backgroundGradient: "bg 5s ease infinite",
+        //bounceX: "moveX 2s linear infinite alternate",
+        //bounceY: "moveY 3s linear infinite alternate"
+        pingPong: "moveX 5s linear infinite, moveY 7.8s linear infinite, spin 1s linear infinite",
       },
       keyframes: {
         bg: {
@@ -22,6 +25,15 @@ module.exports = {
             "background-size": "200% 200%",
             "background-position": "right center",
           },
+        },
+        
+        moveY: {
+          "0%, 100%": { top: "0" },
+          "50%": { top: "92%" },
+        },
+        moveX: {
+          "0%, 100%": { left: "0" },
+          "50%": { left: "92%" },
         },
       },
       colors: {
