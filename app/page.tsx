@@ -26,24 +26,25 @@ export default function Home() {
       </h2>
       <CountDownTimer />
 
+      <p className="p-text">
+        Hääjuhlassa ei ole virallista pukukoodia. Juhlavaatteet kaikissa
+        väreissä ovat sallittuja, mutta pukeutua saa myös rennommin.
+      </p>
+
       {isAuthenticated && !isAdmin ? (
         <>
           <div className="my-2">
             <RSVPCard />
           </div>
           <p className="p-text">
-            Tallennathan yllä olevaan lomakkeeseen tiedon osallistumisestasi
-            hääjuhlaan. Lisää myös mahdolliset muut lisätiedot (allergiat,
-            avecin nimi ym.). Lomake on pariskunta/perhekohtainen, joten jos
-            joku kutsussa nimellä mainituista henkilöistä ei pääse
-            osallistumaan, ilmoitathan myös sen lisätiedoissa. Voit muokata
-            ilmoittautumista ja lisätietoja 15.1.2024 asti.
+            Yllä näet tallentamasi ilmoittautumistiedot. RSVP:tä ei voi enää
+            muokata. Lähetäthän meille viestin, jos tiedot muuttuvat.
           </p>
         </>
       ) : (
         <p className="p-text">
-          Kirjautumalla sisään Kirjaudu-sivulta pääset muokkaamaan RSVP:n
-          tietoja ja näkemään muun sisällön.
+          Kirjautumalla sisään Kirjaudu-sivulta pääset näkemään RSVP:n tiedot ja
+          muun sisällön.
         </p>
       )}
 

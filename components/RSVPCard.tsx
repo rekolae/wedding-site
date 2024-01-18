@@ -145,7 +145,7 @@ export default function RSVPCard() {
                 }
               />
             </div>
-            <div className="mb-4">
+            <div className="">
               <label
                 htmlFor="extra-info"
                 className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
@@ -161,7 +161,9 @@ export default function RSVPCard() {
                 defaultValue={data?.extra_info ? data?.extra_info : ""}
               />
             </div>
-            <SubmitButton />
+            {/*
+              <SubmitButton />
+              */}
           </form>
         </div>
       </div>
