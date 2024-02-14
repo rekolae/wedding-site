@@ -26,10 +26,12 @@ export default function Home() {
       </h2>
       <CountDownTimer />
 
-      <p className="p-text">
+      <p className="p-text px-6">
         Hääjuhlassa ei ole virallista pukukoodia. Juhlavaatteet kaikissa
         väreissä ovat sallittuja, mutta pukeutua saa myös rennommin.
       </p>
+
+      <p className="p-text">Ohjelma ja ruokalista päivitetty 14.2.</p>
 
       {isAuthenticated && !isAdmin ? (
         <>
